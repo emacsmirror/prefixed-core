@@ -109,5 +109,16 @@
 (defalias 're-submatch-p #'match-beginning
   "Return non-nil if SUBEXP did match.")
 
+;; alist
+(defalias 'alist-assoc #'assoc)
+(defalias 'alist-rassoc #'rassoc)
+(defalias 'alist-assq #'assq)
+(defalias 'alist-rassq #'rassq)
+(defalias 'alist-assoc-default #'assoc-default)
+(defalias 'alist-copy #'copy-alist)
+(defalias 'alist-assq-delete-all #'assq-delete-all)
+(defalias 'alist-assoc-delete-all #'assoc-delete-all)
+(defalias 'alist-rassq-delete-all #'rassq-delete-all)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
