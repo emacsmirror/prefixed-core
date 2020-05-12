@@ -120,5 +120,9 @@
 (defalias 'alist-assoc-delete-all #'assoc-delete-all)
 (defalias 'alist-rassq-delete-all #'rassq-delete-all)
 
+;; plist
+(defalias 'plist-get-lax #'lax-plist-get)
+(defalias 'plist-put-lax #'lax-plist-put)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
