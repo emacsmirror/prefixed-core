@@ -30,7 +30,7 @@
 ;; then what it operates on.
 ;;
 ;; In this library, we try to group functions based on their "subject"
-;; and make them share a commen prefix.
+;; and make them share a common prefix.
 ;;
 ;; While this may seem like a futile and impossible endeavor (many functions
 ;; can arguably be reasonably placed in several different groups), I think it
@@ -40,7 +40,7 @@
 ;; Some of the expected benefits are:
 ;; - Making some functionality more discoverable
 ;; - Helping to write code using prefix-based completion.
-;; - Better match he tradition followed in pretty much all programming
+;; - Better match the tradition followed in pretty much all programming
 ;;   languages (including Elisp, for non-core functions).
 
 ;;; Code:
@@ -58,8 +58,8 @@
 ;; Other possibilities, which make sense but might be too verbose to be popular:
 (defalias 'string-downcase #'downcase)
 (defalias 'string-upcase #'upcase)
-(defalias 'string-format #'format)
-(defalias 'string-concat #'concat)
+(defalias 'string-format #'format)      ;FIXME: toolong, unrenamable
+(defalias 'string-concat #'concat)      ;FIXME: unrenamable
 
 ;;;; File names
 (defalias 'file-name-expand #'expand-file-name)
@@ -109,7 +109,11 @@
 (defalias 're-submatch-p #'match-beginning
   "Return non-nil if SUBEXP did match.")
 
-;; alist
+;;;; Alists
+;; FIXME: I doubt this will get much traction, since all the popular functions
+;; affected a significantly lengthened.  "assoc" and "assq" already imply
+;; "alist" to most Lispers IMO, so the new names sound redundant.
+;; IOW, this probably belongs in prefixed-core-extras.
 (defalias 'alist-assoc #'assoc)
 (defalias 'alist-rassoc #'rassoc)
 (defalias 'alist-assq #'assq)
@@ -120,41 +124,50 @@
 (defalias 'alist-assoc-delete-all #'assoc-delete-all)
 (defalias 'alist-rassq-delete-all #'rassq-delete-all)
 
-;; plist
+;;;; Plists
 (defalias 'plist-get-lax #'lax-plist-get)
 (defalias 'plist-put-lax #'lax-plist-put)
 
-;; buffer
-(defalias 'buffer-current #'current-buffer)
-(defalias 'buffer-set #'set-buffer)
+;;;; Buffer
+;; FIXME: The notion of buffer is kind of omnipresent in Elisp
+;; so it's easy to go overboard here, and there are many
+;; functions which are so frequently used that it's virtually
+;; impossible to rename them.
+;; IOW, I think most of the below belong to prefixed-core-extras.
+(defalias 'buffer-current #'current-buffer) ;FIXME: unrenamable
+(defalias 'buffer-set #'set-buffer)         ;FIXME: unrenamable, badname
 (defalias 'buffer-rename #'rename-buffer)
-(defalias 'buffer-get #'get-buffer)
-(defalias 'buffer-generate-new-name #'generate-new-buffer-name)
-(defalias 'buffer-get-file #'get-file-buffer)
-(defalias 'buffer-find-visiting #'find-buffer-visiting)
-(defalias 'buffer-set-visited-file-name #'set-visited-file-name)
-(defalias 'buffer-set-modified #'set-buffer-modified-p)
-(defalias 'buffer-restore-modified #'restore-buffer-modified-p)
-(defalias 'buffer-not-modified #'not-modified)
-(defalias 'buffer-verify-visited-file-modtime #'verify-visited-file-modtime)
-(defalias 'buffer-clear-visited-file-modtime #'clear-visited-file-modtime)
-(defalias 'buffer-visited-file-modtime #'visited-file-modtime)
-(defalias 'buffer-set-visited-file-modtime #'set-visited-file-modtime)
-(defalias 'buffer-ask-user-about-supersession-threat #'ask-user-about-supersession-threat)
-(defalias 'buffer-read-only-mode #'read-only-mode)
-(defalias 'buffer-barf-if-read-only #'barf-if-buffer-read-only)
-(defalias 'buffer-other #'other-buffer)
-(defalias 'buffer-last #'last-buffer)
-(defalias 'buffer-bury #'bury-buffer)
-(defalias 'buffer-unbury #'unbury-buffer)
+(defalias 'buffer-get #'get-buffer)     ;FIXME: unrenamable, badname
 (defalias 'buffer-get-or-create #'get-buffer-create)
+(defalias 'buffer-generate-new-name #'generate-new-buffer-name)
 (defalias 'buffer-generate-new #'generate-new-buffer)
 (defalias 'buffer-kill #'kill-buffer)
 (defalias 'buffer-make-indirect #'make-indirect-buffer)
 (defalias 'buffer-clone-indirect #'clone-indirect-buffer)
 (defalias 'buffer-base #'buffer-base-buffer)
-(defalias 'buffer-gap-position #'gap-position)
+(defalias 'buffer-gap-position #'gap-position) ;FIXME: unused
 (defalias 'buffer-gap-size #'gap-size)
+(defalias 'buffer-set-modified-p #'set-buffer-modified-p)
+(defalias 'buffer-restore-modified-p #'restore-buffer-modified-p)
+(defalias 'buffer-not-modified #'not-modified)
+;; FIXME: The ones below are about *file* buffers rather than about buffers
+;; in general, I think that's why they don't have "buffer" in their names.
+(defalias 'buffer-get-file #'get-file-buffer)
+(defalias 'buffer-find-visiting #'find-buffer-visiting)
+(defalias 'buffer-set-visited-file-name #'set-visited-file-name)
+(defalias 'buffer-verify-visited-file-modtime #'verify-visited-file-modtime)
+(defalias 'buffer-clear-visited-file-modtime #'clear-visited-file-modtime)
+(defalias 'buffer-visited-file-modtime #'visited-file-modtime)
+(defalias 'buffer-set-visited-file-modtime #'set-visited-file-modtime)
+(defalias 'buffer-ask-user-about-supersession-threat #'ask-user-about-supersession-threat)
+(defalias 'buffer-read-only-mode #'read-only-mode) ;FIXME: notspecific
+(defalias 'buffer-barf-if-read-only #'barf-if-buffer-read-only) ;FIXME: notspecific
+;; These manage the lists of buffers rather than buffers themsevles.
+(defalias 'buffer-other #'other-buffer)
+(defalias 'buffer-last #'last-buffer)
+(defalias 'buffer-bury #'bury-buffer)
+(defalias 'buffer-unbury #'unbury-buffer)
+
 
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
