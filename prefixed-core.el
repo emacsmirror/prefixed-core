@@ -215,5 +215,27 @@
 (defalias 'process-start-shell-command #'start-process-shell-command)
 (defalias 'process-stop #'stop-process)
 
+;;;; Keymaps
+(defalias 'keymap-make-composed #'make-composed-keymap)
+(defalias 'keymap-map-sorted #'map-keymap-sorted)
+(defalias 'keymap-copy #'copy-keymap)
+(defalias 'keymap-make #'make-keymap)
+(defalias 'keymap-make-sparse #'make-sparse-keymap)
+(defalias 'keymap-suppress #'suppress-keymap)
+(defalias 'keymap-map #'map-keymap)
+(defalias 'keymap--map #'map-keymap-internal)
+(defalias 'keymap--pop #'internal-pop-keymap)
+(defalias 'keymap--push #'internal-push-keymap)
+(defalias 'keymap-set-parent #'set-keymap-parent)
+(defalias 'keymap-set-transient #'set-transient-map)
+(defalias 'keymap-set-temporary-overlay  #'set-temporary-overlay-map)
+(defalias 'keymap-current-global-map #'current-global-map)
+(defalias 'keymap-current-local-map #'current-local-map)
+(defalias 'keymap-current-minor-mode-maps #'current-minor-mode-maps)
+(defalias 'keymap-current-active-maps #'current-active-maps)
+(defalias 'keymap-use-local-map #'use-local-map)
+(defalias 'keymap-use-global-map #'use-global-map)
+(defalias 'keymap-accessible #'accessible-keymaps)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
