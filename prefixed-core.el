@@ -101,7 +101,8 @@
 (defalias 're-match-data #'match-data)
 (defalias 're-set-match-data #'set-match-data)
 (defalias 're-replace-match #'replace-match)
-;; FIXME: save-match-data?
+(defalias 're-save-match-data #'save-match-data)
+;; If we keep the `match-' prefix, no need for below renames.  --Dmitry
 (defalias 're-submatch #'match-string)
 (defalias 're-submatch-no-properties #'match-string-no-properties)
 (defalias 're-submatch-beg #'match-beginning)
@@ -113,6 +114,9 @@
 ;; FIXME: I doubt this will get much traction, since all the popular functions
 ;; affected a significantly lengthened.  "assoc" and "assq" already imply
 ;; "alist" to most Lispers IMO, so the new names sound redundant.
+;; Also one could argue that one should learn at least the basic Lisp
+;; functions (like car and cdr), and assoc belongs in that category.
+;; Too bad `rassq' and `assoc-default' are not so easy to find.
 ;; IOW, this probably belongs in prefixed-core-extras.
 (defalias 'alist-assoc #'assoc)
 (defalias 'alist-rassoc #'rassoc)
@@ -135,7 +139,7 @@
 ;; impossible to rename them.
 ;; IOW, I think most of the below belong to prefixed-core-extras.
 (defalias 'buffer-current #'current-buffer) ;FIXME: unrenamable
-(defalias 'buffer-set #'set-buffer)         ;FIXME: unrenamable, badname
+(defalias 'buffer-set-current #'set-buffer) ;FIXME: unrenamable
 (defalias 'buffer-rename #'rename-buffer)
 (defalias 'buffer-get #'get-buffer)     ;FIXME: unrenamable, badname
 (defalias 'buffer-get-or-create #'get-buffer-create)
@@ -162,16 +166,17 @@
 (defalias 'buffer-ask-user-about-supersession-threat #'ask-user-about-supersession-threat)
 (defalias 'buffer-read-only-mode #'read-only-mode) ;FIXME: notspecific
 (defalias 'buffer-barf-if-read-only #'barf-if-buffer-read-only) ;FIXME: notspecific
-;; These manage the lists of buffers rather than buffers themsevles.
+;; These manage the lists of buffers rather than buffers themselves.
+;; FIXME: Use the `buffer-list-' prefix?  --Dmitry
 (defalias 'buffer-other #'other-buffer)
 (defalias 'buffer-last #'last-buffer)
 (defalias 'buffer-bury #'bury-buffer)
 (defalias 'buffer-unbury #'unbury-buffer)
 
 ;;;; Processes
-(defalias 'process-accept-outpu #'accept-process-output)
+(defalias 'process-accept-output #'accept-process-output)
 (defalias 'process-call #'call-process)
-(defalias 'process-call-region #'call-process-region)
+(defalias 'process-call-on-region #'call-process-region)
 (defalias 'process-call-shell-command #'call-process-shell-command)
 (defalias 'process-clone #'clone-process)
 (defvaralias 'process-confirm-kill 'confirm-kill-processes)
@@ -186,22 +191,25 @@
   #'internal-default-interrupt-process)
 (defalias 'process--default-filter #'internal-default-process-filter)
 (defalias 'process--default-sentinel #'internal-default-process-sentinel)
-(defalias 'process-interrupt #'inter-process)
+(defalias 'process-interrupt #'interrupt-process)
 (defvaralias 'process-interrupt-functions 'interrupt-process-functions)
 (defalias 'process-kill #'kill-process)
+;; FIXME: I'd also consider using `network-process-', `serial-process-' and
+;; `pipe-process-' as their own namespaces, two functions each.  --Dmitry
 (defalias 'process-network-make #'make-network-process)
 (defalias 'process-pipe-make #'make-pipe-process)
 (defalias 'process-make #'make-process)
 (defalias 'process-serial-make #'make-serial-process)
 (defalias 'process-quit #'quit-process)
-(defvaralias 'read-process-output-max 'process-max-read-output)
+;; FIXME: The `defvaralias' below signals
+;;        "Cannot make an internal variable an alias"
+;;(defvaralias 'read-process-output-max 'process-max-read-output)
 (defalias 'process-serial-configure #'serial-process-configure)
-(defalias 'process-network-set-options #'set-network-process-option)
+(defalias 'process-network-set-option #'set-network-process-option)
 (defalias 'process-set-buffer #'set-process-buffer)
 (defalias 'process-set-coding-system #'set-process-coding-system)
 (defalias 'process-set-datagram-address #'set-process-datagram-address)
 (defalias 'process-set-filter #'set-process-filter)
-(defalias 'process-set-filter-multibyte #'set-process-filter-multibyte)
 (defalias 'process-set-inherit-coding-system-flag #'set-process-inherit-coding-system-flag)
 (defalias 'process-set-plist #'set-process-plist)
 (defalias 'process-set-query-on-exit-flag #'set-process-query-on-exit-flag)
