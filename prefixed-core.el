@@ -256,5 +256,18 @@
 (defalias 'hash-define-table-test #'define-hash-table-test)
 (defalias 'hash-copy #'copy-hash-table)
 
+;; Symbols
+(defalias 'symbol-make #'make-symbol)
+(defalias 'symbol-gen #'gensym)
+(defalias 'symbol-intern #'intern)
+(defalias 'symbol-intern-soft #'intern-soft)
+(defalias 'symbol-mapatoms #'mapatoms)
+(defalias 'symbol-unintern #'unintern)
+(defalias 'symbol-get #'get)
+(defalias 'symbol-put #'put)
+(defalias 'symbol-setplist #'setplist)
+(defalias 'symbol-function-get #'function-get)
+(defalias 'symbol-function-put #'function-put)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
