@@ -269,5 +269,12 @@
 (defalias 'symbol-function-get #'function-get)
 (defalias 'symbol-function-put #'function-put)
 
+;; Byte compile
+(defalias 'byte-compile-defun #'compile-defun)
+(defalias 'byte-batch-compile #'batch-byte-compile)
+(defalias 'byte-fetch-code #'fetch-bytecode)
+(defalias 'byte-make-code #'make-byte-code)
+(defalias 'byte-disassemble #'disassemble)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
