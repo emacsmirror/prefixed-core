@@ -401,5 +401,10 @@
 (defalias 'window-scroll-up #'scroll-up)
 (defalias 'window-scroll-up-command #'scroll-up-command)
 
+;; Terminal
+(defalias 'terminal-delete #'delete-terminal)
+(defalias 'terminal-get-device #'get-device-terminal)
+(defalias 'terminal-set-parameter #'set-terminal-parameter)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
