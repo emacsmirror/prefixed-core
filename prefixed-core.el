@@ -246,7 +246,7 @@
 (defalias 'keymap-use-local-map #'use-local-map)   ;FIXME: setf
 (defalias 'keymap-use-global-map #'use-global-map) ;FIXME: setf
 
-;;;; Hash
+;;;; Hash tables
 (defalias 'hash-make-table #'make-hash-table)
 (defalias 'hash-get #'gethash)
 (defalias 'hash-put #'puthash)
@@ -256,81 +256,104 @@
 (defalias 'hash-define-table-test #'define-hash-table-test)
 (defalias 'hash-copy #'copy-hash-table)
 
-;; Symbols
+;;;; Symbols
 (defalias 'symbol-make #'make-symbol)
-(defalias 'symbol-gen #'gensym)
-(defalias 'symbol-intern #'intern)
-(defalias 'symbol-intern-soft #'intern-soft)
-(defalias 'symbol-mapatoms #'mapatoms)
-(defalias 'symbol-unintern #'unintern)
+(defalias 'symbol-gen #'gensym)         ;FIXME: unrenameable, badname
 (defalias 'symbol-get #'get)
 (defalias 'symbol-put #'put)
-(defalias 'symbol-setplist #'setplist)
+(defalias 'symbol-set-plist #'setplist)
 (defalias 'symbol-function-get #'function-get)
 (defalias 'symbol-function-put #'function-put)
 
-;; Byte compile
+;;;; Obarrays
+(defalias 'obarray-intern #'intern)
+(defalias 'obarray-intern-soft #'intern-soft)
+(defalias 'obarray-map #'mapatoms)
+(defalias 'obarray-unintern #'unintern) ;FIXME: Should it in `symbol-'?
+
+;;;; Byte code
+;; FIXME: For compile&disassemble, I'm not sure the "byte-" prefix is right,
+;; since the fact that they currently operate using byte-code is a kind
+;; of internal detail.
 (defalias 'byte-compile-defun #'compile-defun)
-(defalias 'byte-batch-compile #'batch-byte-compile)
-(defalias 'byte-fetch-code #'fetch-bytecode)
-(defalias 'byte-make-code #'make-byte-code)
+(defalias 'byte-batch-compile #'batch-byte-compile) ;FIXME: `batch-' prefix
+(defalias 'byte-fetch-code #'fetch-bytecode)        ;FIXME: obsolete/internal
+(defalias 'byte-make-code #'make-byte-code)         ;FIXME: `byte-code-' prefix?
 (defalias 'byte-disassemble #'disassemble)
 
-;; Debugging
-(defalias 'debug-cancel-on-entry #'cancel-debug-on-entry)
+;;;; Debugging
+(defalias 'debug-cancel-on-entry #'cancel-debug-on-entry) ;FIXME: badname
 (defalias 'debug-cancel-on-variable-change #'cancel-debug-on-variable-change)
 (defalias 'backtrace-map #'mapbacktrace)
 
-;; Minibuffer - These should not be too controversial
+;;;; Minibuffer
+;; FIXME: These should not be too controversial (famous last words).
 (defalias 'minibuffer-exit-minibuffer #'exit-minibuffer)
 (defalias 'minibuffer-self-insert-and-exit #'self-insert-and-exit)
-(defalias 'minibuffer-set-window #'set-minibuffer-window)
-(defalias 'minibuffer-window-p #'window-minibuffer-p)
+(defalias 'minibuffer-set-window #'set-minibuffer-window) ;FIXME: neverused
+;;(defalias 'minibuffer-window-p #'window-minibuffer-p) ;FIXME: `window-' prefix
 (defalias 'minibuffer-active-window #'active-minibuffer-window)
 (defalias 'minibuffer-delete-contents #'delete-minibuffer-contents)
 (defalias 'minibuffer-read-from #'read-from-minibuffer)
-(defalias 'minibuffer-read #'read-minibuffer)
-(defalias 'minibuffer-eval #'eval-minibuffer)
+(defalias 'minibuffer-read #'read-minibuffer) ;FIXME: ..-read-sexp?
+(defalias 'minibuffer-eval #'eval-minibuffer) ;FIXME: `eval-' prefix?
 
 ;; Minibuffer - Should these be prefixed with `history-' instead?
+;; FIXME: I think so, or maybe `minibuffer-history-'?
 (defalias 'minibuffer-add-to-history #'add-to-history)
-(defalias 'minibuffer-next-complete-history-element #'next-complete-history-element)
+(defalias 'minibuffer-next-complete-history-element
+  #'next-complete-history-element)
 (defalias 'minibuffer-next-history-element #'next-history-element)
-(defalias 'minibuffer-next-matching-history-element #'next-matching-history-element)
-(defalias 'minibuffer-previous-complete-history-element #'previous-complete-history-element)
+(defalias 'minibuffer-next-matching-history-element
+  #'next-matching-history-element)
+(defalias 'minibuffer-previous-complete-history-element
+  #'previous-complete-history-element)
 (defalias 'minibuffer-previous-history-element #'previous-history-element)
-(defalias 'minibuffer-previous-matching-history-element #'previous-matching-history-element)
+(defalias 'minibuffer-previous-matching-history-element
+  #'previous-matching-history-element)
 
 ;; Minibuffer - Should these be prefixed with `completion-' instead?
-(defalias 'minibuffer-all-completions #'all-completions)
-(defalias 'minibuffer-completing-read #'completing-read)
-(defalias 'minibuffer-completion-boundaries #'completion-boundaries)
-(defalias 'minibuffer-completion-in-region #'completion-in-region)
-(defalias 'minibuffer-completion-table-dynamic #'completion-table-dynamic)
-(defalias 'minibuffer-completion-table-with-cache #'completion-table-with-cache)
-(defalias 'minibuffer-display-completion-list #'display-completion-list)
-(defalias 'minibuffer-test-completion #'test-completion)
-(defalias 'minibuffer-try-completion #'try-completion)
+;; FIXME: The whole completion scene is broken for the following reasons:
+;; - It was originally written only for minibuffer-completion, so a lot of
+;;   it accidentally uses "minibuffer-" even tho it has nothing to do
+;;   with a minibuffer.
+;; - The completion.el package collides with a sane naming.
+;; To answer the above question: yes these should not have a "minibuffer-"
+;; prefix because they have nothing to do with the minibuffer.
+;; And there should be different prefixes for things related to
+;; completion *tables* and for those related to completion UIs.
+;;(defalias 'minibuffer-all-completions #'all-completions)
+;;(defalias 'minibuffer-completing-read #'completing-read)
+;;(defalias 'minibuffer-completion-boundaries #'completion-boundaries)
+;;(defalias 'minibuffer-completion-in-region #'completion-in-region)
+;;(defalias 'minibuffer-completion-table-dynamic #'completion-table-dynamic)
+;;(defalias 'minibuffer-completion-table-with-cache #'completion-table-with-cache)
+;;(defalias 'minibuffer-display-completion-list #'display-completion-list)
+;;(defalias 'minibuffer-test-completion #'test-completion)
+;;(defalias 'minibuffer-try-completion #'try-completion)
 
 ;; These should probably be deleted and remain as `read-'
-(defalias 'minibuffer-read-answer #'read-answer)
-(defalias 'minibuffer-read-buffer #'read-buffer)
-(defalias 'minibuffer-read-color #'read-color)
-(defalias 'minibuffer-read-command #'read-command)
-(defalias 'minibuffer-read-directory-name #'read-directory-name)
-(defalias 'minibuffer-read-file-name #'read-file-name)
-(defalias 'minibuffer-read-passwd #'read-passwd)
-(defalias 'minibuffer-read-shell-command #'read-shell-command)
-(defalias 'minibuffer-read-variable #'read-variable)
+;; FIXME; Agreed.
+;;(defalias 'minibuffer-read-answer #'read-answer)
+;;(defalias 'minibuffer-read-buffer #'read-buffer)
+;;(defalias 'minibuffer-read-color #'read-color)
+;;(defalias 'minibuffer-read-command #'read-command)
+;;(defalias 'minibuffer-read-directory-name #'read-directory-name)
+;;(defalias 'minibuffer-read-file-name #'read-file-name)
+;;(defalias 'minibuffer-read-passwd #'read-passwd)
+;;(defalias 'minibuffer-read-shell-command #'read-shell-command)
+;;(defalias 'minibuffer-read-variable #'read-variable)
 
 ;; These I don't know what to do
-(defalias 'minibuffer-y-or-n-p #'y-or-n-p)
-(defalias 'minibuffer-y-or-n-p-with-timeout #'y-or-n-p-with-timeout)
-(defalias 'minibuffer-yes-or-no-p #'yes-or-no-p)
-(defalias 'minibuffer-map-y-or-n-p #'map-y-or-n-p)
-(defalias 'minibuffer-edit-and-eval-command #'edit-and-eval-command)
+;; FIXME: Most don't really belong in "minibuffer-" because they don't
+;; necessarily operate in or using a minibuffer.
+;;(defalias 'minibuffer-y-or-n-p #'y-or-n-p)
+;;(defalias 'minibuffer-y-or-n-p-with-timeout #'y-or-n-p-with-timeout)
+;;(defalias 'minibuffer-yes-or-no-p #'yes-or-no-p)
+;;(defalias 'minibuffer-map-y-or-n-p #'map-y-or-n-p)
+(defalias 'minibuffer-edit-and-eval-command #'edit-and-eval-command) ;FIXME: internal?
 
-;; Windows
+;;;; Windows
 (defalias 'window-adjust-trailing-edge #'adjust-window-trailing-edge)
 (defalias 'window-balance #'balance-windows)
 (defalias 'window-balance-area #'balance-windows-area)
@@ -392,7 +415,7 @@
 (defalias 'window-switch-to-prev-buffer #'switch-to-prev-buffer)
 (defalias 'window-walk #'walk-windows)
 
-;; Windows - We'd probably delete them and keep them under `scroll-'
+;; FIXME: We'd probably delete them and keep them under `scroll-'
 (defalias 'window-scroll-down #'scroll-down)
 (defalias 'window-scroll-down-command #'scroll-down-command)
 (defalias 'window-scroll-left #'scroll-left)
@@ -401,12 +424,12 @@
 (defalias 'window-scroll-up #'scroll-up)
 (defalias 'window-scroll-up-command #'scroll-up-command)
 
-;; Terminal
+;;;; Terminal
 (defalias 'terminal-delete #'delete-terminal)
 (defalias 'terminal-get-device #'get-device-terminal)
 (defalias 'terminal-set-parameter #'set-terminal-parameter)
 
-;; Frames
+;;;; Frames
 (defalias 'frame-current-configuration #'current-frame-configuration)
 (defalias 'frame-delete #'delete-frame)
 (defalias 'frame-delete-other #'delete-other-frames)
