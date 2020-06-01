@@ -246,5 +246,15 @@
 (defalias 'keymap-use-local-map #'use-local-map)   ;FIXME: setf
 (defalias 'keymap-use-global-map #'use-global-map) ;FIXME: setf
 
+;;;; Hash
+(defalias 'hash-make-table #'make-hash-table)
+(defalias 'hash-get #'gethash)
+(defalias 'hash-put #'puthash)
+(defalias 'hash-rem #'remhash)
+(defalias 'hash-clr #'clrhash)
+(defalias 'hash-map #'maphash)
+(defalias 'hash-define-table-test #'define-hash-table-test)
+(defalias 'hash-copy #'copy-hash-table)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
