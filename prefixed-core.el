@@ -276,5 +276,10 @@
 (defalias 'byte-make-code #'make-byte-code)
 (defalias 'byte-disassemble #'disassemble)
 
+;; Debugging
+(defalias 'debug-cancel-on-entry #'cancel-debug-on-entry)
+(defalias 'debug-cancel-on-variable-change #'cancel-debug-on-variable-change)
+(defalias 'backtrace-map #'mapbacktrace)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
