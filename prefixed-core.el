@@ -281,5 +281,54 @@
 (defalias 'debug-cancel-on-variable-change #'cancel-debug-on-variable-change)
 (defalias 'backtrace-map #'mapbacktrace)
 
+;; Minibuffer - These should not be too controversial
+(defalias 'minibuffer-exit-minibuffer #'exit-minibuffer)
+(defalias 'minibuffer-self-insert-and-exit #'self-insert-and-exit)
+(defalias 'minibuffer-set-window #'set-minibuffer-window)
+(defalias 'minibuffer-window-p #'window-minibuffer-p)
+(defalias 'minibuffer-active-window #'active-minibuffer-window)
+(defalias 'minibuffer-delete-contents #'delete-minibuffer-contents)
+(defalias 'minibuffer-read-from #'read-from-minibuffer)
+(defalias 'minibuffer-read #'read-minibuffer)
+(defalias 'minibuffer-eval #'eval-minibuffer)
+
+;; Minibuffer - Should these be prefixed with `history-' instead?
+(defalias 'minibuffer-add-to-history #'add-to-history)
+(defalias 'minibuffer-next-complete-history-element #'next-complete-history-element)
+(defalias 'minibuffer-next-history-element #'next-history-element)
+(defalias 'minibuffer-next-matching-history-element #'next-matching-history-element)
+(defalias 'minibuffer-previous-complete-history-element #'previous-complete-history-element)
+(defalias 'minibuffer-previous-history-element #'previous-history-element)
+(defalias 'minibuffer-previous-matching-history-element #'previous-matching-history-element)
+
+;; Minibuffer - Should these be prefixed with `completion-' instead?
+(defalias 'minibuffer-all-completions #'all-completions)
+(defalias 'minibuffer-completing-read #'completing-read)
+(defalias 'minibuffer-completion-boundaries #'completion-boundaries)
+(defalias 'minibuffer-completion-in-region #'completion-in-region)
+(defalias 'minibuffer-completion-table-dynamic #'completion-table-dynamic)
+(defalias 'minibuffer-completion-table-with-cache #'completion-table-with-cache)
+(defalias 'minibuffer-display-completion-list #'display-completion-list)
+(defalias 'minibuffer-test-completion #'test-completion)
+(defalias 'minibuffer-try-completion #'try-completion)
+
+;; These should probably be deleted and remain as `read-'
+(defalias 'minibuffer-read-answer #'read-answer)
+(defalias 'minibuffer-read-buffer #'read-buffer)
+(defalias 'minibuffer-read-color #'read-color)
+(defalias 'minibuffer-read-command #'read-command)
+(defalias 'minibuffer-read-directory-name #'read-directory-name)
+(defalias 'minibuffer-read-file-name #'read-file-name)
+(defalias 'minibuffer-read-passwd #'read-passwd)
+(defalias 'minibuffer-read-shell-command #'read-shell-command)
+(defalias 'minibuffer-read-variable #'read-variable)
+
+;; These I don't know what to do
+(defalias 'minibuffer-y-or-n-p #'y-or-n-p)
+(defalias 'minibuffer-y-or-n-p-with-timeout #'y-or-n-p-with-timeout)
+(defalias 'minibuffer-yes-or-no-p #'yes-or-no-p)
+(defalias 'minibuffer-map-y-or-n-p #'map-y-or-n-p)
+(defalias 'minibuffer-edit-and-eval-command #'edit-and-eval-command)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
