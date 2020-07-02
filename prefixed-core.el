@@ -184,7 +184,7 @@
 (defvaralias 'process-default-coding-system 'default-process-coding-system)
 (defvaralias 'process-delete-exited 'delete-exited-processes)
 (defalias 'process-delete #'delete-process)
-(defalias 'process-get #'get-process)
+(defalias 'process-from-name #'get-process) ;`process-get' already exits!
 (defalias 'process-from-buffer #'get-buffer-process) ;FIXME: name?
 (defvaralias 'process-inherit-coding-system 'inherit-process-coding-system)
 (defalias 'process--default-interrupt
