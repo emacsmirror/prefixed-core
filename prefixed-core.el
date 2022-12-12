@@ -21,7 +21,7 @@
 
 ;;; Commentary:
 
-;; This library provids new names for old functions.
+;; This library provides new names for old functions.
 ;;
 ;; Many core Lisp functions do not abide by the "package prefix convention"
 ;; that Elisp packages are expected to follow, and instead use a naming
